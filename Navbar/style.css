@@ -1,113 +1,101 @@
-:root{    
-    /* root is equi to html element means apply to whole html5 page */
-    font-size: 16px;
-    /* declare variables in body or in root to access those globaly */
-    --text-primary: #b6b6b6;
-    --text-secondary: #ececec;
-    --bg-primary: #23232e;
-    --bg-secondary: #141418;
+* {
+    /* The box-sizing property allows us to include the padding and border in an element's total width and height.
+    If you set box-sizing: border-box; on an element, padding and border are included in the width and height. */
+    box-sizing: border-box;
 }
 
 body{
-    color: black;
-    background-color: white;
-    margin: 0;
     padding: 0;
-}
-
-::-webkit-scrollbar{
-    /* rem is relative to the font-size of the root element */
-    /* 1rem = font-size in root element */
-    width: 0.5rem;
-}
-
-::-webkit-scrollbar-track{
-    background: var(--text-primary);
-}
-
-::-webkit-scrollbar-thumb{
-    background: palevioletred;
-}
-
-main{
-    margin-left: 5rem;
-    padding: 1rem;
+    margin: 0;
 }
 
 .navbar{
-    /* 5rem = 5 * 16 = 80 */
-    width: 5rem;  
-    /* vh = viewport of the screen, 100vh = 100% to the screen */
-    height: 100vh;
-    /* An element with position: fixed; is positioned relative to the viewport,
-    which means it always stays in the same place even if the page is scrolled */
-    position: fixed;
-    background-color: var(--bg-primary);
-    transition: 200ms;
-}
-
-.navbar-nav{
-    list-style: none;
-    padding: 0;
-    margin: 0;
     display: flex;
-    flex-direction: column;
+    /* as far as possible from each other */
+    justify-content: space-between;
     align-items: center;
+    background-color: #333;
+    color: white;
 }
 
-.nav-item{
-    margin-bottom: 0.1rem;
-    margin-top: 0.1rem;
+.brand-title{
+    font-family: monospace;
+    font-size: 1.5rem;
+    margin: .5rem;
 }
 
-.nav-item:last-child {
-    margin-top: 600px;
+.navbar-links ul{
+    margin: 0;
+    padding: 0;
+    display: flex;
 }
 
-.nav-link{
+.navbar-links li{
+    list-style: none;
+}
+
+/* li and all the anchor tag inside it */
+.navbar-links li a{
+    font-size: 1rem;
+    font-family: monospace;
     text-decoration: none;
-    color: var(--text-primary);
+    color: white;
+    padding: 1rem;
+    /* use all extra space available */
+    display: block;
 }
 
-.link-text:hover{
-    color: #df49a6;
-    /* blur effect */
-    text-shadow: 2px 2px 5px pink;
+.navbar-links li:hover{
+    /* do this without display: block; */
+    transition: .5s;
+    background-color: #555;
+    text-shadow: 2px 2px 5px white;
 }
 
-.navbar:hover {
-    width: 16rem;
+.toggle-btn{
+    position: absolute;
+    top: .75rem;
+    /* push to right of the screen */
+    right: 1rem;
+    display: flex;
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 20px;
 }
 
-@media only screen and (min-width: 600){
+.toggle-btn .bar{
+    height: 3px;
+    width: 100%;
+    background-color: white;
+    border-radius: 10px;
+}
+
+@media (max-width: 600px){
     .navbar{
-        top: 0;
-        width: 5rem;
-        height: 100vh;
+        /* toggle position: absolute; will override this */
+        flex-direction: column;
+        /* align-items: flex-start; */
     }
-
-    .navbar:hover{
-        width: 16rem;
+    .toggle-btn{
+        display: flex;
     }
-
-    .link-text:hover{
-        color: #df49a6;
-        text-shadow: 2px 2px 5px pink;
+    .navbar-links{
+        display: none;
+        width: 100%;
+    }
+    .navbar-links ul{
+        width: 100%;
+        flex-direction: column;
+    }
+    .navbar-links ul li{
+        text-align: center;
+    }
+    .navbar-links ul li a{
+        padding: .5rem 1rem;
+    }
+    .navbar-links.active{
+        display: flex;
     }
 }
-
-/* @media only screen and (max-width: 600px){
-    .navbar{
-        bottom: 0;
-        width: 100vw;
-        height: 5rem;
-    }
-
-    .navbar-nav{
-        flex-direction: row;
-    }
-
-    .nav-link{
-        justify-content: center;
-    }
-} */
